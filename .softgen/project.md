@@ -1,4 +1,4 @@
-# Otok — Riblji Restoran na Silbi
+# Restoran Silba — Riblji Restoran na Silbi
 
 ## Vision
 Premium fish restaurant website showcasing fresh Adriatic seafood on the car-free island of Silba. Target audience: tourists seeking authentic island dining experience, locals, sailing enthusiasts visiting the archipelago.

@@ -5,19 +5,22 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-primary/5 border-t border-border py-12">
+    <footer className="bg-card border-t border-border py-12">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h3 className="font-serif text-2xl font-bold text-primary mb-4">Otok</h3>
+          {/* Restaurant Info */}
+          <div className="space-y-4">
+            <h3 className="font-serif text-2xl font-bold text-primary">Restoran Silba</h3>
             <p className="text-sm text-muted-foreground">
-              Riblji restoran na otoku Silba.<br />
-              Svježa riba s Jadrana od 1985.
+              Svježa riba s Jadrana na otoku Silba
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Obiteljska tradicija već tri generacije
             </p>
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Navigacija</h4>
+            <h4 className="font-semibold text-foreground">Brze Poveznice</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#meni" className="text-muted-foreground hover:text-accent transition-colors">
@@ -30,6 +33,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#galerija" className="text-muted-foreground hover:text-accent transition-colors">
+                  Galerija
+                </a>
+              </li>
+              <li>
                 <a href="#kontakt" className="text-muted-foreground hover:text-accent transition-colors">
                   Kontakt
                 </a>
@@ -38,28 +46,39 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Pratite Nas</h4>
-            <div className="flex gap-4">
+            <h4 className="font-semibold text-foreground">Kontakt</h4>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <p>Obala bb, 23450 Silba</p>
+              <p>+385 98 123 4567</p>
+              <p>info@otoc-silba.hr</p>
+            </div>
+            <div className="flex gap-4 pt-2">
               <a 
-                href="#" 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="w-6 h-6" />
+                <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="w-6 h-6" />
+                <Instagram className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© {currentYear} Otok Restoran. Sva prava pridržana.</p>
+        <div className="pt-8 border-t border-border text-center">
+          <p className="text-sm text-muted-foreground">
+            &copy; {currentYear} Restoran Silba. Sva prava pridržana.
+          </p>
         </div>
       </div>
     </footer>

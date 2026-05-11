@@ -5,7 +5,7 @@ export default function Document() {
   const restaurantSchema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "name": "Otok",
+    "name": "Restoran Silba",
     "description": "Riblji restoran na otoku Silba s dnevno svježim ulovom i tradicionalnim receptima",
     "image": "https://otoc-silba.hr/og-image.png",
     "address": {

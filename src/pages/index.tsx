@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="Otok - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana"
-        description="Otkrijte autentični okus Jadrana u restoranu Otok na otoku Silba. Dnevno svjež ulov, tradicionalni recepti, grillani brancin, hobotnica, crni rižoto. Rezervirajte stol online."
+        title="Restoran Silba - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana"
+        description="Otkrijte autentični okus Jadrana u restoranu Restoran Silba na otoku Silba. Dnevno svjež ulov, tradicionalni recepti, grillani brancin, hobotnica, crni rižoto. Rezervirajte stol online."
         image="/og-image.png"
         url="https://otoc-silba.hr"
       />

@@ -18,7 +18,7 @@ export function Hero() {
           {/* Main Heading with Stagger Animation */}
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight">
-              Otok
+              Restoran Silba
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 font-medium">
               Svježa riba s Jadrana na otoku Silba

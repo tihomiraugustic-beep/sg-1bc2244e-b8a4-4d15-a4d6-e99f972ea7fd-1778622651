@@ -2,54 +2,77 @@ import { Anchor, MapPin, Ship } from "lucide-react";
 
 export function About() {
   return (
-    <section id="o-nama" className="py-24 bg-muted/30 scroll-mt-20">
+    <section id="o-nama" className="py-20 md:py-32 bg-card">
       <div className="container">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6 text-primary">
+        <div className="text-center mb-16">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">
             O Nama
           </h2>
-          
-          <div className="prose prose-lg max-w-none text-center mb-16">
-            <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-              Otok je obiteljski restoran smješten na netaknutom otoku Silba, jednom od rijetkih 
-              otoka bez automobila na Jadranu. Već tri generacije pripremamo najsvježiju ribu 
-              koju more može ponuditi.
-            </p>
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              Svako jutro naši ribari izlaze na more, a mi za vas biramo najbolje iz dnevnog ulova. 
-              Jednostavna priprema, tradicijski recepti, i ljubav prema moru — to je naša priča.
-            </p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tradicija, kvaliteta i ljubav prema Jadranu
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Text Content */}
+          <div className="space-y-6">
+            <h3 className="font-serif text-3xl font-semibold text-primary">Naša Priča</h3>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Restoran Silba je obiteljski restoran smješten na netaknutom otoku Silba, jednom od rijetkih 
+                otoka na Jadranu bez automobila. Naša priča započela je prije više od tri desetljeća 
+                s jednostavnom vizijom: ponuditi najsvježiju ribu iz našeg mora pripremljenu po 
+                tradicionalnim dalmatinskim receptima.
+              </p>
+              <p>
+                Svaki dan naši ribari donose svježi ulov direktno s mora, garantirajući da svako 
+                jelo koje serviramo nosi autentični okus Jadrana. Od jednostavnih grilovanih riba 
+                do složenih tradicionalnih specijaliteta, svaki zalogaj priča priču o našoj strasti 
+                prema kulinarskoj izvrsnosti.
+              </p>
+              <p>
+                Uživajte u našoj terasi s pogledom na kristalno čisto more, dok vam naš tim 
+                priprema nezaboravne gastronomske doživljaje. Dobrodošli u našu obitelj.
+              </p>
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-                <Anchor className="w-8 h-8" />
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 gap-6">
+            <div className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border">
+              <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <Ship className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Lokalni Ulov</h3>
-              <p className="text-sm text-muted-foreground">
-                Svježa riba direktno s lokalnih ribarskih brodova
-              </p>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Dnevno Svjež Ulov</h4>
+                <p className="text-sm text-muted-foreground">
+                  Naši ribari donose ribu svaki dan, garantirajući vrhunsku svježinu i kvalitetu.
+                </p>
+              </div>
             </div>
-            
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-                <MapPin className="w-8 h-8" />
+
+            <div className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border">
+              <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <Anchor className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Otok bez Automobila</h3>
-              <p className="text-sm text-muted-foreground">
-                Autentično otočko iskustvo u miru i tišini
-              </p>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Tradicionalni Recepti</h4>
+                <p className="text-sm text-muted-foreground">
+                  Pripremamo jela po autentičnim receptima prenesenim kroz generacije.
+                </p>
+              </div>
             </div>
-            
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-                <Ship className="w-8 h-8" />
+
+            <div className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border">
+              <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <MapPin className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Obiteljska Tradicija</h3>
-              <p className="text-sm text-muted-foreground">
-                Tri generacije čuvaju recepte i kvalitetu
-              </p>
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Otok Bez Automobila</h4>
+                <p className="text-sm text-muted-foreground">
+                  Silba je mirno utočište, savršeno za bijeg od gradske vreve i uživanje u prirodi.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ type ReservationData = {
   phone: string;
   date: string;
   time: string;
-  guests: number;
+  guests: string;
   message?: string;
 };
 
@@ -16,7 +16,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
@@ -24,7 +24,7 @@ export default async function handler(
 
     // Validate required fields
     if (!name || !email || !phone || !date || !time || !guests) {
-      return res.status(400).json({ message: "Molimo popunite sva obavezna polja" });
+      return res.status(400).json({ error: "Sva obavezna polja moraju biti popunjena." });
     }
 
     // Create nodemailer transporter
@@ -32,7 +32,7 @@ export default async function handler(
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
       port: parseInt(process.env.SMTP_PORT || "587"),
-      secure: process.env.SMTP_SECURE === "true",
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -40,17 +40,17 @@ export default async function handler(
     });
 
     // Email to restaurant
-    const restaurantEmail = {
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    const restaurantMailOptions = {
+      from: `"Restoran Silba" <${process.env.SMTP_USER}>`,
       to: process.env.RESTAURANT_EMAIL || "info@otoc-silba.hr",
       subject: `Nova Rezervacija - ${name}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563A5;">Nova Rezervacija Stola</h2>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #2563A5;">Nova Rezervacija</h2>
+          <p>Primljena je nova rezervacija sa sljedećim detaljima:</p>
           
-          <div style="background: #F5F0E8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0;">Detalji Rezervacije:</h3>
-            <p><strong>Ime:</strong> ${name}</p>
+          <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <p><strong>Ime i prezime:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Telefon:</strong> ${phone}</p>
             <p><strong>Datum:</strong> ${date}</p>
@@ -59,22 +59,20 @@ export default async function handler(
             ${message ? `<p><strong>Napomena:</strong> ${message}</p>` : ""}
           </div>
           
-          <p style="color: #666; font-size: 14px;">
-            Ova rezervacija je poslana putem web forme na otoc-silba.hr
-          </p>
+          <p>Molimo kontaktirajte gosta za potvrdu rezervacije.</p>
         </div>
       `,
     };
 
-    // Confirmation email to customer
+    // Email to customer (confirmation)
     const customerMailOptions = {
-      from: `"Otok Restoran" <${process.env.SMTP_USER}>`,
+      from: `"Restoran Silba" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: "Potvrda Rezervacije - Otok Restoran",
+      subject: "Potvrda Rezervacije - Restoran Silba",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #2563A5;">Poštovani/a ${name},</h2>
-          <p>Hvala što ste odabrali Otok restoran! Primili smo Vašu rezervaciju sa sljedećim detaljima:</p>
+          <p>Hvala što ste odabrali Restoran Silba! Primili smo Vašu rezervaciju sa sljedećim detaljima:</p>
           
           <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <p><strong>Datum:</strong> ${date}</p>
@@ -85,12 +83,12 @@ export default async function handler(
           
           <p>Ukoliko trebate promijeniti ili otkazati rezervaciju, molimo kontaktirajte nas putem telefona.</p>
           <p>Veselimo se Vašem dolasku!</p>
-          <p>Srdačan pozdrav,<br><strong>Tim Otok Restorana</strong></p>
+          <p>Srdačan pozdrav,<br><strong>Tim Restoran Silba</strong></p>
           
           <hr style="border: none; border-top: 1px solid #ddd; margin-top: 30px;" />
           <div style="color: #777; font-size: 12px; margin-top: 10px;">
             <p>
-              Otok Restoran | Obala bb, 23450 Silba | +385 23 370 XXX<br>
+              Restoran Silba | Obala bb, 23450 Silba | +385 23 370 XXX<br>
               Ovaj email je generiran automatski. Molimo ne odgovarajte direktno na ovu poruku.
             </p>
           </div>
@@ -99,26 +97,17 @@ export default async function handler(
     };
 
     // Send emails
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      await transporter.sendMail(restaurantEmail);
-      await transporter.sendMail(customerMailOptions);
-      
-      return res.status(200).json({ 
-        message: "Rezervacija uspješno poslana! Provjerite svoj email za potvrdu." 
-      });
-    } else {
-      // If SMTP not configured, just log and return success
-      console.log("Reservation received:", { name, email, phone, date, time, guests, message });
-      console.log("Note: SMTP not configured. Set SMTP_USER and SMTP_PASS environment variables to enable email sending.");
-      
-      return res.status(200).json({ 
-        message: "Rezervacija primljena! (Email nije poslan - SMTP nije konfiguriran)" 
-      });
-    }
+    await transporter.sendMail(restaurantMailOptions);
+    await transporter.sendMail(customerMailOptions);
+
+    res.status(200).json({ 
+      success: true, 
+      message: "Rezervacija uspješno poslana!" 
+    });
   } catch (error) {
     console.error("Error sending reservation:", error);
-    return res.status(500).json({ 
-      message: "Greška prilikom slanja rezervacije. Molimo pokušajte ponovo ili nas kontaktirajte telefonom." 
+    res.status(500).json({ 
+      error: "Došlo je do greške pri slanju rezervacije. Molimo pokušajte ponovo ili nas kontaktirajte telefonom." 
     });
   }
 }

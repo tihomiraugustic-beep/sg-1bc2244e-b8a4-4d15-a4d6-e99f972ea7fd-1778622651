@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeSwitch } from "@/components/ThemeSwitch";
 
 export function Navigation() {
   return (
@@ -9,19 +10,23 @@ export function Navigation() {
             Otoč
           </Link>
           
-          <div className="flex items-center gap-6 md:gap-8">
-            <a href="#meni" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
-              Meni
-            </a>
-            <a href="#o-nama" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
-              O Nama
-            </a>
-            <a href="#galerija" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
-              Galerija
-            </a>
-            <a href="#kontakt" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
-              Kontakt
-            </a>
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-6 md:gap-8">
+              <a href="#meni" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
+                Meni
+              </a>
+              <a href="#o-nama" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
+                O Nama
+              </a>
+              <a href="#galerija" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
+                Galerija
+              </a>
+              <a href="#kontakt" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
+                Kontakt
+              </a>
+            </div>
+            
+            <ThemeSwitch />
           </div>
         </div>
       </div>

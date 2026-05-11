@@ -156,6 +156,78 @@ export function Contact() {
             </div>
           </div>
           
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-serif text-3xl font-semibold text-primary mb-6">
+                Kontaktirajte Nas
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <MapPin className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Adresa</h4>
+                    <p className="text-muted-foreground">Obala bb, 23450 Silba</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Phone className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Telefon</h4>
+                    <a href="tel:+38598123456" className="text-muted-foreground hover:text-accent transition-colors">
+                      +385 98 123 4567
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Mail className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Email</h4>
+                    <a href="mailto:info@otoc-silba.hr" className="text-muted-foreground hover:text-accent transition-colors">
+                      info@otoc-silba.hr
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Clock className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Radno Vrijeme</h4>
+                    <p className="text-muted-foreground">Svaki dan: 12:00 - 23:00</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Ship className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Dolazak na Otok</h4>
+                    <p className="text-muted-foreground">
+                      Trajektna linija iz Zadra. Otok Silba je bez automobila - idealan za 
+                      miran odmor uz more.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="rounded-lg overflow-hidden border border-border shadow-md">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.427947864147!2d14.694684!3d44.3667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47634e0f0f0f0f0f%3A0x0!2sSilba%2C%20Croatia!5e0!3m2!1sen!2shr!4v1234567890"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Lokacija Restoran Silba na otoku Silba"
+                className="w-full"
+              />
+            </div>
+          </div>
+          
           <div className="bg-muted/50 rounded-lg p-8">
             <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
               Rezervirajte Stol

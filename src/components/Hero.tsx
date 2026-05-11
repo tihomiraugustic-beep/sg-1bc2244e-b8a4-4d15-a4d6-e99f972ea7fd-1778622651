@@ -10,7 +10,7 @@ export function Hero() {
           style={{ backgroundImage: "url('/generated/hero-seafood.png')" }}
         />
         {/* Darker overlay for light theme, lighter for dark theme */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/85 to-background dark:from-background/60 dark:via-background/70 dark:to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/95 to-background dark:from-background/60 dark:via-background/70 dark:to-background" />
       </div>
 
       {/* Content */}

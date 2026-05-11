@@ -1,75 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Ship, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Ship } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
-const reservationSchema = z.object({
-  name: z.string().min(2, "Ime mora imati najmanje 2 znaka"),
-  email: z.string().email("Unesite ispravnu email adresu"),
-  phone: z.string().min(9, "Unesite ispravan broj telefona"),
-  date: z.string().min(1, "Odaberite datum"),
-  time: z.string().min(1, "Odaberite vrijeme"),
-  guests: z.string().min(1, "Unesite broj gostiju"),
-  message: z.string().optional(),
-});
-
-type ReservationFormData = z.infer<typeof reservationSchema>;
 
 export function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ReservationFormData>({
-    resolver: zodResolver(reservationSchema),
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    date: "",
+    time: "",
+    guests: "2",
+    message: "",
   });
 
-  const onSubmit = async (data: ReservationFormData) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch("/api/reservation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...data,
-          guests: parseInt(data.guests),
-        }),
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
       if (response.ok) {
         toast({
-          title: "Rezervacija poslana!",
-          description: result.message,
+          title: "Rezervacija uspješna!",
+          description: "Vaša rezervacija je primljena. Poslali smo vam potvrdu na email.",
+          variant: "default",
         });
-        reset();
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          time: "",
+          guests: "2",
+          message: "",
+        });
       } else {
         toast({
           title: "Greška",
-          description: result.message,
+          description: data.error || "Dogodila se greška pri slanju rezervacije.",
           variant: "destructive",
         });
       }
     } catch (error) {
       toast({
         title: "Greška",
-        description: "Nešto je pošlo po krivu. Molimo pokušajte ponovo.",
+        description: "Nismo mogli poslati vašu rezervaciju. Molimo pokušajte ponovo.",
         variant: "destructive",
       });
     } finally {
@@ -165,19 +164,17 @@ export function Contact() {
               Preporučujemo rezervaciju, posebno tijekom ljetne sezone
             </p>
             
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Ime i Prezime *</Label>
                   <Input
                     id="name"
-                    {...register("name")}
+                    name="name"
                     placeholder="Vaše ime"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.name && (
-                    <p className="text-sm text-destructive">{errors.name.message}</p>
-                  )}
                 </div>
                 
                 <div className="space-y-2">
@@ -185,13 +182,11 @@ export function Contact() {
                   <Input
                     id="email"
                     type="email"
-                    {...register("email")}
+                    name="email"
                     placeholder="vas@email.com"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.email && (
-                    <p className="text-sm text-destructive">{errors.email.message}</p>
-                  )}
                 </div>
               </div>
               
@@ -201,13 +196,11 @@ export function Contact() {
                   <Input
                     id="phone"
                     type="tel"
-                    {...register("phone")}
+                    name="phone"
                     placeholder="+385 91 234 5678"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.phone && (
-                    <p className="text-sm text-destructive">{errors.phone.message}</p>
-                  )}
                 </div>
                 
                 <div className="space-y-2">
@@ -217,13 +210,11 @@ export function Contact() {
                     type="number"
                     min="1"
                     max="20"
-                    {...register("guests")}
+                    name="guests"
                     placeholder="2"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.guests && (
-                    <p className="text-sm text-destructive">{errors.guests.message}</p>
-                  )}
                 </div>
               </div>
               
@@ -233,12 +224,10 @@ export function Contact() {
                   <Input
                     id="date"
                     type="date"
-                    {...register("date")}
+                    name="date"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.date && (
-                    <p className="text-sm text-destructive">{errors.date.message}</p>
-                  )}
                 </div>
                 
                 <div className="space-y-2">
@@ -246,12 +235,10 @@ export function Contact() {
                   <Input
                     id="time"
                     type="time"
-                    {...register("time")}
+                    name="time"
                     disabled={isSubmitting}
+                    onChange={handleChange}
                   />
-                  {errors.time && (
-                    <p className="text-sm text-destructive">{errors.time.message}</p>
-                  )}
                 </div>
               </div>
               
@@ -259,10 +246,11 @@ export function Contact() {
                 <Label htmlFor="message">Posebne Napomene (opcionalno)</Label>
                 <Textarea
                   id="message"
-                  {...register("message")}
+                  name="message"
                   placeholder="Alergije, posebni zahtjevi, proslave..."
                   rows={4}
                   disabled={isSubmitting}
+                  onChange={handleChange}
                 />
               </div>
               

@@ -9,7 +9,7 @@ export function Footer() {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-serif text-2xl font-bold text-primary mb-4">Otoč</h3>
+            <h3 className="font-serif text-2xl font-bold text-primary mb-4">Otok</h3>
             <p className="text-sm text-muted-foreground">
               Riblji restoran na otoku Silba.<br />
               Svježa riba s Jadrana od 1985.
@@ -59,7 +59,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© {currentYear} Otoč Restoran. Sva prava pridržana.</p>
+          <p>© {currentYear} Otok Restoran. Sva prava pridržana.</p>
         </div>
       </div>
     </footer>

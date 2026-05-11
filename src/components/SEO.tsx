@@ -8,9 +8,17 @@ export interface SEOProps {
   url?: string;
 }
 
+const defaultSEO = {
+  title: "Otok - Riblji Restoran na Otoku Silba",
+  description: "Svježa riba s Jadrana. Autentični otočki restoran na Silbi s dnevno svježim ulovom i tradicionalnim receptima.",
+  image: "/og-image.png",
+  url: "https://otoc-silba.hr",
+  keywords: "restoran Silba, riblji restoran Silba, restoran Zadar, dalmatinska kuhinja, svježa riba, Jadran, otočki restoran, konoba Silba, brancin, hobotnica, crni rižoto, mediteranska kuhinja"
+};
+
 // SEOElements for _document.tsx (static, no Head wrapper)
 export function SEOElements({
-  title = "Otoč - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana",
+  title = "Otok - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana",
   description = "Otkrijte autentični okus Jadrana u restoranu Otoč na otoku Silba. Dnevno svjež ulov, tradicionalni recepti, i jedinstvena otočka atmosfera. Rezervirajte svoj stol danas.",
   image = "/og-image.png",
   url = "https://otoc-silba.hr"
@@ -50,7 +58,7 @@ export function SEOElements({
 
 // SEO component for dynamic pages (wrapped in Head)
 export function SEO({
-  title = "Otoč - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana",
+  title = "Otok - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana",
   description = "Otkrijte autentični okus Jadrana u restoranu Otoč na otoku Silba. Dnevno svjež ulov, tradicionalni recepti, i jedinstvena otočka atmosfera. Rezervirajte svoj stol danas.",
   image = "/og-image.png",
   url = "https://otoc-silba.hr"

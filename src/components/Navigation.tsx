@@ -7,7 +7,7 @@ export function Navigation() {
       <div className="container">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="font-serif text-2xl md:text-3xl font-bold text-primary hover:text-primary/80 transition-colors">
-            Otoč
+            Otok
           </Link>
           
           <div className="flex items-center gap-4 md:gap-6">

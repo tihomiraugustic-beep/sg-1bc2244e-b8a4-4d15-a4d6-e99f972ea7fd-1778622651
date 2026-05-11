@@ -1,6 +1,6 @@
 ---
 title: Photo Gallery with Lightbox
-status: in_progress
+status: done
 priority: medium
 type: feature
 tags: [gallery, images, lightbox]

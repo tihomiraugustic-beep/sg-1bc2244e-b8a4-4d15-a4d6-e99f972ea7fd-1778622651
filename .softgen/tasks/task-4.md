@@ -1,6 +1,6 @@
 ---
 title: Reservation Form with Email
-status: todo
+status: in_progress
 priority: high
 type: feature
 tags: [form, email, api]
@@ -13,13 +13,13 @@ position: 4
 Create functional reservation form that sends email notifications. Use React Hook Form for validation and Next.js API route with nodemailer for email delivery.
 
 ## Checklist
-- [ ] Install nodemailer dependency
-- [ ] Create API endpoint /api/reservation for handling form submissions
-- [ ] Update Contact component with reservation form (name, email, phone, date, time, guests, message)
-- [ ] Add form validation with React Hook Form + Zod
-- [ ] Implement loading and success/error states
-- [ ] Configure SMTP settings via environment variables
-- [ ] Add user feedback (toast notifications)
+- [x] Install nodemailer dependency
+- [x] Create API endpoint /api/reservation for handling form submissions
+- [x] Update Contact component with reservation form (name, email, phone, date, time, guests, message)
+- [x] Add form validation with React Hook Form + Zod
+- [x] Implement loading and success/error states
+- [x] Configure SMTP settings via environment variables
+- [x] Add user feedback (toast notifications)
 
 ## Acceptance
 - Form validates all required fields before submission

@@ -5,6 +5,7 @@ import { About } from "@/components/About";
 import { Gallery } from "@/components/Gallery";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { FloatingCallButton } from "@/components/FloatingCallButton";
 import { SEO } from "@/components/SEO";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Gallery />
       <Contact />
       <Footer />
+      <FloatingCallButton />
     </>
   );
 }

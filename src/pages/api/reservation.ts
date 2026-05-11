@@ -67,39 +67,33 @@ export default async function handler(
     };
 
     // Confirmation email to customer
-    const customerEmail = {
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    const customerMailOptions = {
+      from: `"Otok Restoran" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: "Potvrda Rezervacije - Otoč Restoran",
+      subject: "Potvrda Rezervacije - Otok Restoran",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563A5;">Potvrda Vaše Rezervacije</h2>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #2563A5;">Poštovani/a ${name},</h2>
+          <p>Hvala što ste odabrali Otok restoran! Primili smo Vašu rezervaciju sa sljedećim detaljima:</p>
           
-          <p>Poštovani ${name},</p>
-          
-          <p>Hvala što ste odabrali Otoč restoran! Primili smo Vašu rezervaciju sa sljedećim detaljima:</p>
-          
-          <div style="background: #F5F0E8; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <p><strong>Datum:</strong> ${date}</p>
             <p><strong>Vrijeme:</strong> ${time}</p>
             <p><strong>Broj gostiju:</strong> ${guests}</p>
+            ${message ? `<p><strong>Vaša napomena:</strong> ${message}</p>` : ""}
           </div>
           
-          <p>Kontaktirat ćemo Vas uskoro telefonom na broj ${phone} kako bismo potvrdili rezervaciju.</p>
+          <p>Ukoliko trebate promijeniti ili otkazati rezervaciju, molimo kontaktirajte nas putem telefona.</p>
+          <p>Veselimo se Vašem dolasku!</p>
+          <p>Srdačan pozdrav,<br><strong>Tim Otok Restorana</strong></p>
           
-          <p>Veselimo se Vašem posjetu!</p>
-          
-          <p style="margin-top: 30px;">
-            S poštovanjem,<br>
-            <strong>Tim Otoč Restorana</strong>
-          </p>
-          
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-          
-          <p style="color: #666; font-size: 12px;">
-            Otoč Restoran | Obala bb, 23450 Silba | +385 23 370 XXX<br>
-            info@otoc-silba.hr
-          </p>
+          <hr style="border: none; border-top: 1px solid #ddd; margin-top: 30px;" />
+          <div style="color: #777; font-size: 12px; margin-top: 10px;">
+            <p>
+              Otok Restoran | Obala bb, 23450 Silba | +385 23 370 XXX<br>
+              Ovaj email je generiran automatski. Molimo ne odgovarajte direktno na ovu poruku.
+            </p>
+          </div>
         </div>
       `,
     };
@@ -107,7 +101,7 @@ export default async function handler(
     // Send emails
     if (process.env.SMTP_USER && process.env.SMTP_PASS) {
       await transporter.sendMail(restaurantEmail);
-      await transporter.sendMail(customerEmail);
+      await transporter.sendMail(customerMailOptions);
       
       return res.status(200).json({ 
         message: "Rezervacija uspješno poslana! Provjerite svoj email za potvrdu." 

@@ -11,7 +11,7 @@ export function About() {
           
           <div className="prose prose-lg max-w-none text-center mb-16">
             <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-              Otoč je obiteljski restoran smješten na netaknutom otoku Silba, jednom od rijetkih 
+              Otok je obiteljski restoran smješten na netaknutom otoku Silba, jednom od rijetkih 
               otoka bez automobila na Jadranu. Već tri generacije pripremamo najsvježiju ribu 
               koju more može ponuditi.
             </p>

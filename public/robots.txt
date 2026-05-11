@@ -1,0 +1,9 @@
+# Robots.txt for Otoč Restaurant
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://otoc-silba.hr/api/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1

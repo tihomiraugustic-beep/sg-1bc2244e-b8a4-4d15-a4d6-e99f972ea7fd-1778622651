@@ -1,6 +1,6 @@
 ---
 title: Hero & Navigation
-status: in_progress
+status: done
 priority: urgent
 type: feature
 tags: [hero, navigation, design-system]

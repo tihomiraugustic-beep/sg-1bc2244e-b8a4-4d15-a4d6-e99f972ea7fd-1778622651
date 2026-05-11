@@ -1,6 +1,6 @@
 ---
 title: About & Contact Section
-status: todo
+status: in_progress
 priority: medium
 type: feature
 tags: [about, contact, location]
@@ -13,12 +13,12 @@ position: 3
 Tell restaurant story, highlight Silba location uniqueness, provide contact and reservation details.
 
 ## Checklist
-- [ ] Create About section: brief story about restaurant, focus on fresh local catch, Silba's car-free island charm
-- [ ] Add "Posjetite Nas" contact section with address (fictional: Obala bb, 23450 Silba), phone, email
-- [ ] Note about boat access (Silba is car-free island, accessible by ferry from Zadar)
-- [ ] Add simple map reference or location details
-- [ ] Footer with hours, social links placeholders, copyright
-- [ ] Ensure all text maintains warm, welcoming but refined tone
+- [x] Create About section: brief story about restaurant, focus on fresh local catch, Silba's car-free island charm
+- [x] Add "Posjetite Nas" contact section with address (fictional: Obala bb, 23450 Silba), phone, email
+- [x] Note about boat access (Silba is car-free island, accessible by ferry from Zadar)
+- [x] Add simple map reference or location details
+- [x] Footer with hours, social links placeholders, copyright
+- [x] Ensure all text maintains warm, welcoming but refined tone
 
 ## Acceptance
 - About section conveys authentic island restaurant atmosphere

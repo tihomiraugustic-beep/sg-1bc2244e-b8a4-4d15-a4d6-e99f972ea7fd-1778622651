@@ -9,12 +9,15 @@ export function Navigation() {
             Otoč
           </Link>
           
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6 md:gap-8">
             <a href="#meni" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
               Meni
             </a>
             <a href="#o-nama" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
               O Nama
+            </a>
+            <a href="#galerija" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
+              Galerija
             </a>
             <a href="#kontakt" className="text-sm md:text-base font-medium hover:text-accent transition-colors">
               Kontakt

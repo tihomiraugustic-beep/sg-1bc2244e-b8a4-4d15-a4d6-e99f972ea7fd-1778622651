@@ -1,6 +1,6 @@
 ---
 title: About & Contact Section
-status: in_progress
+status: done
 priority: medium
 type: feature
 tags: [about, contact, location]

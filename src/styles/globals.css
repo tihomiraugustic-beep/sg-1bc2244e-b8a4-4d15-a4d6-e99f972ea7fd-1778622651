@@ -13,24 +13,24 @@
 @layer base {
   :root {
     --radius: 0.55rem;
-    --background: 205 45% 96%;
+    --background: 205 50% 92%;
     --foreground: 215 25% 20%;
-    --card: 205 40% 97%;
+    --card: 205 45% 94%;
     --card-foreground: 215 25% 20%;
-    --popover: 205 50% 98%;
+    --popover: 205 50% 95%;
     --popover-foreground: 215 25% 20%;
     --primary: 211 63% 40%;
-    --primary-foreground: 205 45% 96%;
-    --secondary: 205 30% 92%;
+    --primary-foreground: 205 50% 92%;
+    --secondary: 205 35% 88%;
     --secondary-foreground: 215 25% 20%;
-    --muted: 205 25% 90%;
+    --muted: 205 30% 86%;
     --muted-foreground: 215 25% 35%;
     --accent: 14 65% 57%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 205 25% 88%;
-    --input: 205 25% 88%;
+    --border: 205 30% 84%;
+    --input: 205 30% 84%;
     --ring: 211 63% 40%;
     --chart-1: 41.1 71.2% 54.4%;
     --chart-2: 184.7 32.4% 48.6%;

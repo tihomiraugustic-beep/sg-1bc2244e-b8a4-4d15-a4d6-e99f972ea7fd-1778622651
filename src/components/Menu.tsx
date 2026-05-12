@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
@@ -5,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, Variants, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export function Menu() {
+function MenuComponent() {
   const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -148,7 +149,9 @@ export function Menu() {
                   src={dish.image}
                   alt={t(dish.nameKey)}
                   fill
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 {dish.specialty && (
                   <div className="absolute top-3 right-3">
@@ -193,3 +196,5 @@ export function Menu() {
     </section>
   );
 }
+
+export const Menu = memo(MenuComponent);

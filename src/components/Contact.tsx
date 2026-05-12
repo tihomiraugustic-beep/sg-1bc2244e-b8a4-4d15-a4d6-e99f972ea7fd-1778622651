@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useState, useRef } from "react";
+import { MapPin, Phone, Mail, Clock, Ship, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,10 +9,13 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
 
 export function Contact() {
-  const { t, language } = useLanguage();
   const { toast } = useToast();
+  const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -20,38 +23,13 @@ export function Contact() {
     phone: "",
     date: "",
     time: "",
-    guests: "",
-    message: ""
+    guests: "2",
+    message: "",
   });
 
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: t("contact.info.address.title"),
-      content: t("contact.info.address.content")
-    },
-    {
-      icon: Phone,
-      title: t("contact.info.phone.title"),
-      content: t("contact.info.phone.content")
-    },
-    {
-      icon: Mail,
-      title: t("contact.info.email.title"),
-      content: t("contact.info.email.content")
-    },
-    {
-      icon: Clock,
-      title: t("contact.info.hours.title"),
-      content: t("contact.info.hours.content")
-    }
-  ];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,31 +45,35 @@ export function Contact() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         toast({
-          title: language === "hr" ? "Rezervacija poslana!" : "Reservation sent!",
-          description: language === "hr" 
-            ? "Javit ćemo vam se uskoro za potvrdu." 
-            : "We'll contact you soon to confirm.",
+          title: t("contact.form.success"),
+          description: t("contact.form.success"),
+          variant: "default",
         });
+        
         setFormData({
           name: "",
           email: "",
           phone: "",
           date: "",
           time: "",
-          guests: "",
-          message: ""
+          guests: "2",
+          message: "",
         });
       } else {
-        throw new Error("Failed to send reservation");
+        toast({
+          title: t("contact.form.error"),
+          description: data.error || t("contact.form.error"),
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({
-        title: language === "hr" ? "Greška" : "Error",
-        description: language === "hr"
-          ? "Nešto je pošlo po zlu. Molimo pokušajte ponovno."
-          : "Something went wrong. Please try again.",
+        title: t("contact.form.error"),
+        description: t("contact.form.error"),
         variant: "destructive",
       });
     } finally {
@@ -99,188 +81,231 @@ export function Contact() {
     }
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: t("contact.location"),
+      content: ["Obala bb", "23450 Silba", "Hrvatska"]
+    },
+    {
+      icon: Phone,
+      title: t("contact.phone"),
+      content: ["+385 23 370 XXX"]
+    },
+    {
+      icon: Mail,
+      title: t("contact.email"),
+      content: ["info@otoc-silba.hr"]
+    },
+    {
+      icon: Clock,
+      title: t("contact.hours"),
+      content: [t("contact.hours.daily"), t("contact.hours.season")]
+    }
+  ];
+
   return (
-    <section id="kontakt" className="py-16 md:py-24 bg-muted/30">
+    <section id="kontakt" className="py-16 md:py-20 lg:py-32 bg-background" ref={ref}>
       <div className="container px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+        <motion.div 
           className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
             {t("contact.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("contact.subtitle")}
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            {contactInfo.map((info, index) => (
+        {/* Contact Information Grid */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        >
+          {contactInfo.map((info, index) => {
+            const Icon = info.icon;
+            return (
               <motion.div
                 key={index}
+                className="flex items-start gap-4"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="flex gap-4 items-start p-6 bg-card rounded-lg shadow-sm border border-border"
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1, ease: "easeOut" }}
               >
-                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-accent" />
+                <div className="text-accent mt-1">
+                  <Icon className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
-                  <p className="text-muted-foreground text-sm md:text-base">{info.content}</p>
+                  <h3 className="font-semibold mb-1">{info.title}</h3>
+                  <div className="text-muted-foreground">
+                    {info.content.map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
-            ))}
-
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-sm border border-border"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2901.4285974947545!2d14.708676315437!3d44.370528179104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDTCsDIyJzEzLjkiTiAxNMKwNDInMzEuMiJF!5e0!3m2!1sen!2shr!4v1234567890123!5m2!1sen!2shr"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Restaurant location map"
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Reservation Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-            className="bg-card p-6 md:p-8 rounded-lg shadow-sm border border-border"
-          >
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-6">
-              {t("contact.form.title")}
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">{t("contact.form.name")}</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder={t("contact.form.namePlaceholder")}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t("contact.form.email")}</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder={t("contact.form.emailPlaceholder")}
-                  />
-                </div>
-              </div>
-
+            );
+          })}
+        </motion.div>
+        
+        {/* Google Maps Embed */}
+        <motion.div 
+          className="rounded-lg overflow-hidden border border-border shadow-md mb-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+        >
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.427947864147!2d14.694684!3d44.3667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47634e0f0f0f0f0f%3A0x0!2sSilba%2C%20Croatia!5e0!3m2!1sen!2shr!4v1234567890"
+            width="100%"
+            height="350"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title={t("contact.location")}
+            className="w-full"
+          />
+        </motion.div>
+        
+        {/* Reservation Form */}
+        <motion.div 
+          className="bg-muted/50 rounded-lg p-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+        >
+          <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
+            {t("contact.reservation.title")}
+          </h3>
+          <p className="text-muted-foreground mb-6 text-center">
+            {t("contact.subtitle")}
+          </p>
+          
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="phone">{t("contact.form.phone")}</Label>
+                <Label htmlFor="name">{t("contact.form.name")} *</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder={t("contact.form.name")}
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                  value={formData.name}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="email">{t("contact.form.email")} *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder={t("contact.form.email")}
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                  value={formData.email}
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="phone">{t("contact.form.phone")} *</Label>
                 <Input
                   id="phone"
-                  name="phone"
                   type="tel"
+                  name="phone"
+                  placeholder="+385 91 234 5678"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
                   value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder={t("contact.form.phonePlaceholder")}
                 />
               </div>
-
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="date">{t("contact.form.date")}</Label>
-                  <Input
-                    id="date"
-                    name="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="time">{t("contact.form.time")}</Label>
-                  <Input
-                    id="time"
-                    name="time"
-                    type="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="guests">{t("contact.form.guests")}</Label>
-                  <Input
-                    id="guests"
-                    name="guests"
-                    type="number"
-                    min="1"
-                    max="20"
-                    value={formData.guests}
-                    onChange={handleChange}
-                    required
-                    placeholder="2"
-                  />
-                </div>
-              </div>
-
+              
               <div className="space-y-2">
-                <Label htmlFor="message">{t("contact.form.message")}</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                <Label htmlFor="guests">{t("contact.form.guests")} *</Label>
+                <Input
+                  id="guests"
+                  type="number"
+                  min="1"
+                  max="20"
+                  name="guests"
+                  placeholder="2"
+                  disabled={isSubmitting}
                   onChange={handleChange}
-                  placeholder={t("contact.form.messagePlaceholder")}
-                  rows={4}
+                  value={formData.guests}
                 />
               </div>
-
-              <Button
-                type="submit"
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="date">{t("contact.form.date")} *</Label>
+                <Input
+                  id="date"
+                  type="date"
+                  name="date"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                  value={formData.date}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="time">{t("contact.form.time")} *</Label>
+                <Input
+                  id="time"
+                  type="time"
+                  name="time"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                  value={formData.time}
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="message">{t("contact.form.message")}</Label>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder={t("contact.form.message")}
+                rows={4}
                 disabled={isSubmitting}
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-              >
-                {isSubmitting 
-                  ? (language === "hr" ? "Šalje se..." : "Sending...") 
-                  : t("contact.form.submit")
-                }
-              </Button>
-            </form>
-          </motion.div>
-        </div>
+                onChange={handleChange}
+                value={formData.message}
+              />
+            </div>
+            
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t("contact.form.submitting")}
+                </>
+              ) : (
+                t("contact.form.submit")
+              )}
+            </Button>
+            
+            <p className="text-sm text-muted-foreground text-center">
+              * {t("contact.form.name")}
+            </p>
+          </form>
+        </motion.div>
       </div>
     </section>
   );

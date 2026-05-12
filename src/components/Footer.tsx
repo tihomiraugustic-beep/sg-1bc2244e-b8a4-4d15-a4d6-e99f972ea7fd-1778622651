@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <footer className="bg-card border-t border-border py-8 md:py-12">
@@ -46,6 +46,11 @@ export function Footer() {
                 <a href="#kontakt" className="text-muted-foreground hover:text-accent transition-colors">
                   {t("nav.contact")}
                 </a>
+              </li>
+              <li>
+                <Link href="/politika-privatnosti" className="text-muted-foreground hover:text-accent transition-colors">
+                  {language === "hr" ? "Politika privatnosti" : "Privacy Policy"}
+                </Link>
               </li>
             </ul>
           </div>

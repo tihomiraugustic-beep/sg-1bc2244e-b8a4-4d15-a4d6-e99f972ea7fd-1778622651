@@ -3,9 +3,12 @@ title: Reservation Form with Email
 status: done
 priority: high
 type: feature
-tags: [form, email, api]
+tags:
+- form
+- email
+- api
 created_by: agent
-created_at: 2026-05-11T23:02:52Z
+created_at: 2026-05-11 23:02:52+00:00
 position: 4
 ---
 

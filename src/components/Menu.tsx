@@ -2,8 +2,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, Variants, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export function Menu() {
@@ -91,7 +90,7 @@ export function Menu() {
     }
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -101,7 +100,7 @@ export function Menu() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,

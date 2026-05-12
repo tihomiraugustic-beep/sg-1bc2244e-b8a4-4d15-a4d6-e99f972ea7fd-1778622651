@@ -6,8 +6,7 @@ import "yet-another-react-lightbox/styles.css";
 import { Camera } from "lucide-react";
 import Image from "next/image"; // Added import
 import { useLanguage } from "@/contexts/LanguageContext"; // Added import
-import { motion } from "framer-motion"; // Added import
-import { useInView } from "framer-motion"; // Added import
+import { motion, Variants, useInView } from "framer-motion"; // Added import
 import { useRef } from "react"; // Added import
 
 const galleryImages = [
@@ -56,7 +55,7 @@ export function Gallery() {
     title: img.title
   }));
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -66,7 +65,7 @@ export function Gallery() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,

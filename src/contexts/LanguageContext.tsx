@@ -12,12 +12,13 @@ interface LanguageContextType {
 
 const translations = {
   hr: {
-    // Navigation
-    "nav.menu": "Meni",
-    "nav.about": "O Nama",
-    "nav.gallery": "Galerija",
-    "nav.contact": "Kontakt",
-    
+    nav: {
+      title: "Restoran Silba",
+      menu: "Meni",
+      about: "O nama",
+      gallery: "Galerija",
+      contact: "Kontakt"
+    },
     // Hero
     "hero.title": "Restoran Silba",
     "hero.subtitle": "Svježa riba s Jadrana na otoku Silba",
@@ -102,12 +103,13 @@ const translations = {
     "footer.copyright": "Sva prava pridržana.",
   },
   en: {
-    // Navigation
-    "nav.menu": "Menu",
-    "nav.about": "About",
-    "nav.gallery": "Gallery",
-    "nav.contact": "Contact",
-    
+    nav: {
+      title: "Restoran Silba",
+      menu: "Menu",
+      about: "About",
+      gallery: "Gallery",
+      contact: "Contact"
+    },
     // Hero
     "hero.title": "Restaurant Silba",
     "hero.subtitle": "Fresh Adriatic Seafood on Silba Island",

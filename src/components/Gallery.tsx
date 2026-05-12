@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { Camera } from "lucide-react";
-import Image from "next/image"; // Added import
-import { useLanguage } from "@/contexts/LanguageContext"; // Added import
-import { motion, Variants, useInView } from "framer-motion"; // Added import
-import { useRef } from "react"; // Added import
+import { Camera, X } from "lucide-react";
+import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion, Variants, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const galleryImages = [
   {
@@ -43,9 +43,9 @@ const galleryImages = [
 ];
 
 export function Gallery() {
-  const { t } = useLanguage(); // Added to use the language context
-  const ref = useRef(null); // Added to track visibility
-  const isInView = useInView(ref, { once: true, margin: "-100px" }); // Added for animation
+  const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 

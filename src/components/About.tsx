@@ -1,98 +1,110 @@
-import { Anchor, MapPin, Ship } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Award, Fish, Heart } from "lucide-react";
+import Image from "next/image";
 
 export function About() {
   const { t } = useLanguage();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   const features = [
     {
-      icon: Ship,
-      title: t("about.fishing"),
-      description: t("about.story.p2")
+      icon: Fish,
+      title: t("about.features.freshCatch.title"),
+      description: t("about.features.freshCatch.description")
     },
     {
-      icon: Anchor,
-      title: t("about.tradition"),
-      description: t("about.story.p1")
+      icon: Heart,
+      title: t("about.features.tradition.title"),
+      description: t("about.features.tradition.description")
     },
     {
-      icon: MapPin,
-      title: t("about.location"),
-      description: t("about.story.p3")
+      icon: Award,
+      title: t("about.features.quality.title"),
+      description: t("about.features.quality.description")
     }
   ];
 
   return (
-    <section id="o-nama" className="py-16 md:py-20 lg:py-32 bg-card" ref={ref}>
+    <section id="o-nama" className="py-16 md:py-24 bg-muted/30">
       <div className="container px-4">
-        <motion.div 
-          className="text-center mb-12 md:mb-16"
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">
             {t("about.title")}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("about.subtitle")}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Text Content */}
-          <motion.div 
-            className="space-y-4 md:space-y-6"
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4 md:space-y-6"
           >
-            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-primary">
-              {t("about.story.title")}
-            </h3>
-            <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
-              <p>{t("about.story.p1")}</p>
-              <p>{t("about.story.p2")}</p>
-              <p>{t("about.story.p3")}</p>
-            </div>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t("about.description.p1")}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t("about.description.p2")}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t("about.description.p3")}
+            </p>
           </motion.div>
 
-          {/* Features Grid */}
-          <motion.div 
-            className="grid grid-cols-1 gap-6"
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg"
           >
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1, ease: "easeOut" }}
-                >
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+            <Image
+              src="/generated/ambiance-terrace.png"
+              alt="Restaurant ambiance"
+              fill
+              className="object-cover"
+            />
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              className="bg-card p-6 md:p-8 rounded-lg shadow-sm border border-border text-center space-y-4"
+            >
+              <div className="w-12 h-12 md:w-14 md:h-14 mx-auto bg-accent/10 rounded-full flex items-center justify-center">
+                <feature.icon className="w-6 h-6 md:w-7 md:h-7 text-accent" />
+              </div>
+              <h3 className="font-serif text-xl md:text-2xl font-semibold text-foreground">
+                {feature.title}
+              </h3>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

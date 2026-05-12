@@ -1,66 +1,82 @@
-import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { ChevronDown } from "lucide-react";
 
 export function Hero() {
   const { t } = useLanguage();
-  
+
+  const scrollToMenu = () => {
+    document.getElementById("meni")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/generated/hero-seafood.png')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/95 to-background dark:from-background/60 dark:via-background/70 dark:to-background" />
+    <section 
+      id="pocetna"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/generated/hero-seafood.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
-          {/* Main Heading with Stagger Animation */}
-          <motion.div 
-            className="space-y-3 md:space-y-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight">
-              {t("hero.title")}
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/90 font-medium px-4">
-              {t("hero.subtitle")}
-            </p>
-          </motion.div>
-
-          {/* Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+      <div className="container relative z-10 px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-6"
+        >
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-primary">
+            {t("hero.title")}
+          </h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
           >
-            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-              {t("hero.description")}
-            </p>
-          </motion.div>
-
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            {t("hero.subtitle")}
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="text-base md:text-lg text-muted-foreground italic"
           >
-            <Button 
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => document.getElementById('meni')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              {t("hero.cta")}
-            </Button>
-          </motion.div>
-        </div>
+            {t("hero.location")}
+          </motion.p>
+        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.button
+        onClick={scrollToMenu}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-primary hover:text-primary/80 transition-colors"
+        aria-label="Scroll to menu"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-8 h-8" />
+        </motion.div>
+      </motion.button>
     </section>
   );
 }

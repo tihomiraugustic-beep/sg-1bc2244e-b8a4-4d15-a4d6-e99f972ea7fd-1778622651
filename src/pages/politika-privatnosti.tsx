@@ -3,7 +3,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { Shield, Lock, Eye, FileText, Mail, Phone } from "lucide-react";
+import { Shield, Lock, Eye, FileText, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function PrivacyPolicy() {
   const { language } = useLanguage();
@@ -293,12 +294,12 @@ export default function PrivacyPolicy() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <a
+                <Link
                   href="/"
                   className="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium"
                 >
                   ← {language === "hr" ? "Povratak na početnu" : "Back to Home"}
-                </a>
+                </Link>
               </motion.div>
             </div>
           </div>

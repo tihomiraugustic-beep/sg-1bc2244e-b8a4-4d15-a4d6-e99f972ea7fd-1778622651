@@ -67,18 +67,18 @@ const menuItems: MenuItem[] = [
 
 export function Menu() {
   return (
-    <section id="meni" className="py-24 scroll-mt-20">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-primary">
+    <section id="meni" className="py-16 md:py-20 lg:py-32 bg-background">
+      <div className="container px-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
             Naš Meni
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Sve što vidite dolazi svježe s jutarnjeg ribarskog tržišta
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            Dnevno svjež ulov iz Jadranskog mora
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {menuItems.map((item, index) => (
             <Card 
               key={index} 

@@ -14,21 +14,21 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 pt-32 pb-20">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+      <div className="container relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
           {/* Main Heading with Stagger Animation */}
-          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight">
+          <div className="space-y-3 md:space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight">
               Restoran Silba
             </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 font-medium">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/90 font-medium px-4">
               Svježa riba s Jadrana na otoku Silba
             </p>
           </div>
 
           {/* Description */}
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
               Autentična otočka konoba s generacijskim nasljeđem
             </p>
           </div>
@@ -37,7 +37,7 @@ export function Hero() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
             <Button 
               size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-8 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={() => document.getElementById('meni')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Pogledaj Meni

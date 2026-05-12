@@ -2,22 +2,22 @@ import { Anchor, MapPin, Ship } from "lucide-react";
 
 export function About() {
   return (
-    <section id="o-nama" className="py-20 md:py-32 bg-card">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">
+    <section id="o-nama" className="py-16 md:py-20 lg:py-32 bg-card">
+      <div className="container px-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
             O Nama
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Tradicija, kvaliteta i ljubav prema Jadranu
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Text Content */}
-          <div className="space-y-6">
-            <h3 className="font-serif text-3xl font-semibold text-primary">Naša Priča</h3>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <div className="space-y-4 md:space-y-6">
+            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-primary">Naša Priča</h3>
+            <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
               <p>
                 Restoran Silba je obiteljski restoran smješten na netaknutom otoku Silba, jednom od rijetkih 
                 otoka na Jadranu bez automobila. Naša priča započela je prije više od tri desetljeća 

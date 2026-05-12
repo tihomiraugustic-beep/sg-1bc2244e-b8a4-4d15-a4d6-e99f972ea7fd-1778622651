@@ -6,6 +6,7 @@ import { Gallery } from "@/components/Gallery";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { FloatingCallButton } from "@/components/FloatingCallButton";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { SEO } from "@/components/SEO";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
       <Contact />
       <Footer />
       <FloatingCallButton />
+      <ScrollToTop />
     </>
   );
 }

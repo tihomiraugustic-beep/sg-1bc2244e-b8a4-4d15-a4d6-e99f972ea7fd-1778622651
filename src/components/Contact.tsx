@@ -77,219 +77,219 @@ export function Contact() {
   };
 
   return (
-    <section id="kontakt" className="py-24 scroll-mt-20">
-      <div className="container">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6 text-primary">
-            Posjetite Nas
+    <section id="kontakt" className="py-16 md:py-20 lg:py-32 bg-background">
+      <div className="container px-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
+            Kontakt
           </h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            Rezervirajte stol ili nas kontaktirajte
+          </p>
+        </div>
+
+        {/* Contact Information Grid - Stack on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="text-accent mt-1">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Adresa</h3>
+                <p className="text-muted-foreground">
+                  Obala bb<br />
+                  23450 Silba<br />
+                  Hrvatska
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="text-accent mt-1">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Telefon</h3>
+                <p className="text-muted-foreground">+385 23 370 XXX</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="text-accent mt-1">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Email</h3>
+                <p className="text-muted-foreground">info@otoc-silba.hr</p>
+              </div>
+            </div>
+          </div>
           
-          <p className="text-center text-muted-foreground mb-12 text-lg">
-            Čekamo vas u srcu otoka Silba
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="text-accent mt-1">
+                <Clock className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Radno Vrijeme</h3>
+                <p className="text-muted-foreground">
+                  Ponedjeljak - Nedjelja<br />
+                  12:00 - 23:00<br />
+                  (Sezonsko: Travanj - Listopad)
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="text-accent mt-1">
+                <Ship className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Kako Doći</h3>
+                <p className="text-muted-foreground">
+                  Trajekt iz Zadra prema Silbi<br />
+                  Otok je bez automobila<br />
+                  Pješice 5 min od pristaništa
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Google Maps Embed */}
+        <div className="rounded-lg overflow-hidden border border-border shadow-md mb-12">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.427947864147!2d14.694684!3d44.3667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47634e0f0f0f0f0f%3A0x0!2sSilba%2C%20Croatia!5e0!3m2!1sen!2shr!4v1234567890"
+            width="100%"
+            height="350"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Lokacija Restoran Silba na otoku Silba"
+            className="w-full"
+          />
+        </div>
+        
+        <div className="bg-muted/50 rounded-lg p-8">
+          <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
+            Rezervirajte Stol
+          </h3>
+          <p className="text-muted-foreground mb-6 text-center">
+            Preporučujemo rezervaciju, posebno tijekom ljetne sezone
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="text-accent mt-1">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Adresa</h3>
-                  <p className="text-muted-foreground">
-                    Obala bb<br />
-                    23450 Silba<br />
-                    Hrvatska
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="text-accent mt-1">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Telefon</h3>
-                  <p className="text-muted-foreground">+385 23 370 XXX</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="text-accent mt-1">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">info@otoc-silba.hr</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="text-accent mt-1">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Radno Vrijeme</h3>
-                  <p className="text-muted-foreground">
-                    Ponedjeljak - Nedjelja<br />
-                    12:00 - 23:00<br />
-                    (Sezonsko: Travanj - Listopad)
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="text-accent mt-1">
-                  <Ship className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Kako Doći</h3>
-                  <p className="text-muted-foreground">
-                    Trajekt iz Zadra prema Silbi<br />
-                    Otok je bez automobila<br />
-                    Pješice 5 min od pristaništa
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Google Maps Embed */}
-          <div className="rounded-lg overflow-hidden border border-border shadow-md mb-12">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.427947864147!2d14.694684!3d44.3667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47634e0f0f0f0f0f%3A0x0!2sSilba%2C%20Croatia!5e0!3m2!1sen!2shr!4v1234567890"
-              width="100%"
-              height="350"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Lokacija Restoran Silba na otoku Silba"
-              className="w-full"
-            />
-          </div>
-          
-          <div className="bg-muted/50 rounded-lg p-8">
-            <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
-              Rezervirajte Stol
-            </h3>
-            <p className="text-muted-foreground mb-6 text-center">
-              Preporučujemo rezervaciju, posebno tijekom ljetne sezone
-            </p>
-            
-            <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Ime i Prezime *</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="Vaše ime"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="vas@email.com"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Telefon *</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    name="phone"
-                    placeholder="+385 91 234 5678"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="guests">Broj Gostiju *</Label>
-                  <Input
-                    id="guests"
-                    type="number"
-                    min="1"
-                    max="20"
-                    name="guests"
-                    placeholder="2"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="date">Datum *</Label>
-                  <Input
-                    id="date"
-                    type="date"
-                    name="date"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="time">Vrijeme *</Label>
-                  <Input
-                    id="time"
-                    type="time"
-                    name="time"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="message">Posebne Napomene (opcionalno)</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Alergije, posebni zahtjevi, proslave..."
-                  rows={4}
+                <Label htmlFor="name">Ime i Prezime *</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Vaše ime"
                   disabled={isSubmitting}
                   onChange={handleChange}
                 />
               </div>
               
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Šaljem...
-                  </>
-                ) : (
-                  "Pošalji Rezervaciju"
-                )}
-              </Button>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="vas@email.com"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="phone">Telefon *</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="+385 91 234 5678"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                />
+              </div>
               
-              <p className="text-sm text-muted-foreground text-center">
-                * Obavezna polja
-              </p>
-            </form>
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="guests">Broj Gostiju *</Label>
+                <Input
+                  id="guests"
+                  type="number"
+                  min="1"
+                  max="20"
+                  name="guests"
+                  placeholder="2"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="date">Datum *</Label>
+                <Input
+                  id="date"
+                  type="date"
+                  name="date"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="time">Vrijeme *</Label>
+                <Input
+                  id="time"
+                  type="time"
+                  name="time"
+                  disabled={isSubmitting}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="message">Posebne Napomene (opcionalno)</Label>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Alergije, posebni zahtjevi, proslave..."
+                rows={4}
+                disabled={isSubmitting}
+                onChange={handleChange}
+              />
+            </div>
+            
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Šaljem...
+                </>
+              ) : (
+                "Pošalji Rezervaciju"
+              )}
+            </Button>
+            
+            <p className="text-sm text-muted-foreground text-center">
+              * Obavezna polja
+            </p>
+          </form>
         </div>
       </div>
     </section>

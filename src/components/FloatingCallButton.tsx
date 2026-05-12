@@ -7,7 +7,7 @@ export function FloatingCallButton() {
   return (
     <a
       href="tel:+38598123456"
-      className="fixed bottom-6 right-6 z-50 md:hidden"
+      className="md:hidden fixed bottom-6 left-6 z-50 animate-in fade-in slide-in-from-bottom-4"
       aria-label="Nazovi restoran"
     >
       <Button

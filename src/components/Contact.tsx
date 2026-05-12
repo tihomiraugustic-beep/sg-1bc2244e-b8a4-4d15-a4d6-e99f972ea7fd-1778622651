@@ -7,9 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Contact() {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -43,8 +45,8 @@ export function Contact() {
 
       if (response.ok) {
         toast({
-          title: "Rezervacija uspješna!",
-          description: "Vaša rezervacija je primljena. Poslali smo vam potvrdu na email.",
+          title: t("contact.form.success"),
+          description: t("contact.form.success"),
           variant: "default",
         });
         
@@ -60,15 +62,15 @@ export function Contact() {
         });
       } else {
         toast({
-          title: "Greška",
-          description: data.error || "Dogodila se greška pri slanju rezervacije.",
+          title: t("contact.form.error"),
+          description: data.error || t("contact.form.error"),
           variant: "destructive",
         });
       }
     } catch (error) {
       toast({
-        title: "Greška",
-        description: "Nismo mogli poslati vašu rezervaciju. Molimo pokušajte ponovo.",
+        title: t("contact.form.error"),
+        description: t("contact.form.error"),
         variant: "destructive",
       });
     } finally {
@@ -81,10 +83,10 @@ export function Contact() {
       <div className="container px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
-            Kontakt
+            {t("contact.title")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Rezervirajte stol ili nas kontaktirajte
+            {t("contact.subtitle")}
           </p>
         </div>
 
@@ -96,7 +98,7 @@ export function Contact() {
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Adresa</h3>
+                <h3 className="font-semibold mb-1">{t("contact.location")}</h3>
                 <p className="text-muted-foreground">
                   Obala bb<br />
                   23450 Silba<br />
@@ -110,7 +112,7 @@ export function Contact() {
                 <Phone className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Telefon</h3>
+                <h3 className="font-semibold mb-1">{t("contact.phone")}</h3>
                 <p className="text-muted-foreground">+385 23 370 XXX</p>
               </div>
             </div>
@@ -120,7 +122,7 @@ export function Contact() {
                 <Mail className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Email</h3>
+                <h3 className="font-semibold mb-1">{t("contact.email")}</h3>
                 <p className="text-muted-foreground">info@otoc-silba.hr</p>
               </div>
             </div>
@@ -132,25 +134,10 @@ export function Contact() {
                 <Clock className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Radno Vrijeme</h3>
+                <h3 className="font-semibold mb-1">{t("contact.hours")}</h3>
                 <p className="text-muted-foreground">
-                  Ponedjeljak - Nedjelja<br />
-                  12:00 - 23:00<br />
-                  (Sezonsko: Travanj - Listopad)
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="text-accent mt-1">
-                <Ship className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Kako Doći</h3>
-                <p className="text-muted-foreground">
-                  Trajekt iz Zadra prema Silbi<br />
-                  Otok je bez automobila<br />
-                  Pješice 5 min od pristaništa
+                  {t("contact.hours.daily")}<br />
+                  {t("contact.hours.season")}
                 </p>
               </div>
             </div>
@@ -167,48 +154,50 @@ export function Contact() {
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Lokacija Restoran Silba na otoku Silba"
+            title={t("contact.location")}
             className="w-full"
           />
         </div>
         
         <div className="bg-muted/50 rounded-lg p-8">
           <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
-            Rezervirajte Stol
+            {t("contact.reservation.title")}
           </h3>
           <p className="text-muted-foreground mb-6 text-center">
-            Preporučujemo rezervaciju, posebno tijekom ljetne sezone
+            {t("contact.subtitle")}
           </p>
           
           <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Ime i Prezime *</Label>
+                <Label htmlFor="name">{t("contact.form.name")} *</Label>
                 <Input
                   id="name"
                   name="name"
-                  placeholder="Vaše ime"
+                  placeholder={t("contact.form.name")}
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.name}
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
+                <Label htmlFor="email">{t("contact.form.email")} *</Label>
                 <Input
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="vas@email.com"
+                  placeholder={t("contact.form.email")}
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.email}
                 />
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="phone">Telefon *</Label>
+                <Label htmlFor="phone">{t("contact.form.phone")} *</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -216,11 +205,12 @@ export function Contact() {
                   placeholder="+385 91 234 5678"
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.phone}
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="guests">Broj Gostiju *</Label>
+                <Label htmlFor="guests">{t("contact.form.guests")} *</Label>
                 <Input
                   id="guests"
                   type="number"
@@ -230,43 +220,47 @@ export function Contact() {
                   placeholder="2"
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.guests}
                 />
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="date">Datum *</Label>
+                <Label htmlFor="date">{t("contact.form.date")} *</Label>
                 <Input
                   id="date"
                   type="date"
                   name="date"
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.date}
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="time">Vrijeme *</Label>
+                <Label htmlFor="time">{t("contact.form.time")} *</Label>
                 <Input
                   id="time"
                   type="time"
                   name="time"
                   disabled={isSubmitting}
                   onChange={handleChange}
+                  value={formData.time}
                 />
               </div>
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="message">Posebne Napomene (opcionalno)</Label>
+              <Label htmlFor="message">{t("contact.form.message")}</Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Alergije, posebni zahtjevi, proslave..."
+                placeholder={t("contact.form.message")}
                 rows={4}
                 disabled={isSubmitting}
                 onChange={handleChange}
+                value={formData.message}
               />
             </div>
             
@@ -279,15 +273,15 @@ export function Contact() {
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Šaljem...
+                  {t("contact.form.submitting")}
                 </>
               ) : (
-                "Pošalji Rezervaciju"
+                t("contact.form.submit")
               )}
             </Button>
             
             <p className="text-sm text-muted-foreground text-center">
-              * Obavezna polja
+              * {t("contact.form.name")}
             </p>
           </form>
         </div>

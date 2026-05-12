@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Facebook, Instagram } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-card border-t border-border py-8 md:py-12">
@@ -10,37 +12,39 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* Restaurant Info */}
           <div className="space-y-3 md:space-y-4 text-center sm:text-left">
-            <h3 className="font-serif text-xl md:text-2xl font-bold text-primary">Restoran Silba</h3>
+            <h3 className="font-serif text-xl md:text-2xl font-bold text-primary">
+              {t("footer.title")}
+            </h3>
             <p className="text-sm text-muted-foreground">
-              Svježa riba s Jadrana na otoku Silba
+              {t("footer.tagline")}
             </p>
             <p className="text-sm text-muted-foreground">
-              Obiteljska tradicija već tri generacije
+              {t("footer.tradition")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-3 md:space-y-4 text-center sm:text-left">
-            <h4 className="font-semibold text-foreground">Brze Poveznice</h4>
+            <h4 className="font-semibold text-foreground">{t("footer.links")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#meni" className="text-muted-foreground hover:text-accent transition-colors">
-                  Meni
+                  {t("nav.menu")}
                 </a>
               </li>
               <li>
                 <a href="#o-nama" className="text-muted-foreground hover:text-accent transition-colors">
-                  O Nama
+                  {t("nav.about")}
                 </a>
               </li>
               <li>
                 <a href="#galerija" className="text-muted-foreground hover:text-accent transition-colors">
-                  Galerija
+                  {t("nav.gallery")}
                 </a>
               </li>
               <li>
                 <a href="#kontakt" className="text-muted-foreground hover:text-accent transition-colors">
-                  Kontakt
+                  {t("nav.contact")}
                 </a>
               </li>
             </ul>
@@ -48,7 +52,7 @@ export function Footer() {
 
           {/* Contact & Social */}
           <div className="space-y-3 md:space-y-4 text-center sm:text-left">
-            <h4 className="font-semibold text-foreground">Kontakt</h4>
+            <h4 className="font-semibold text-foreground">{t("footer.contact")}</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
               <p>Obala bb, 23450 Silba</p>
               <p>+385 98 123 4567</p>
@@ -80,7 +84,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="pt-6 md:pt-8 border-t border-border text-center">
           <p className="text-xs md:text-sm text-muted-foreground">
-            &copy; {currentYear} Restoran Silba. Sva prava pridržana.
+            &copy; {currentYear} {t("footer.title")}. {t("footer.copyright")}
           </p>
         </div>
       </div>

@@ -1,83 +1,86 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Menu() {
+  const { t } = useLanguage();
+  
   const dishes = [
     {
-      name: "Grillani Brancin",
-      description: "Svježi brancin s roštilja s blitvom, krumpirom i maslinovim uljem",
+      nameKey: "dish.seabass",
+      descKey: "dish.seabass.desc",
       price: "20€",
       image: "/generated/dish-seabass.png",
       specialty: true
     },
     {
-      name: "Hobotnica Ispod Peke",
-      description: "Tradicionalna hobotnica pečena pod pekom s krumpirom i blitvom",
+      nameKey: "dish.octopus",
+      descKey: "dish.octopus.desc",
       price: "22€",
       image: "/generated/dish-octopus-peka.png",
       specialty: true
     },
     {
-      name: "Salata od Hobotnice",
-      description: "Hobotnica, krumpir, crveni luk, kapare, maslinovo ulje i limun",
+      nameKey: "dish.octopus.salad",
+      descKey: "dish.octopus.salad.desc",
       price: "14€",
       image: "/generated/dish-octopus-salad.png"
     },
     {
-      name: "Crni Rižoto",
-      description: "Crni rižoto od sipe s domaćim bijelim vinom",
+      nameKey: "dish.risotto",
+      descKey: "dish.risotto.desc",
       price: "18€",
       image: "/generated/dish-black-risotto.png",
       specialty: true
     },
     {
-      name: "Lignje na Žaru",
-      description: "Pržene lignje punjene sa češnjakom i peršinom, blitva i krumpir",
+      nameKey: "dish.squid",
+      descKey: "dish.squid.desc",
       price: "16€",
       image: "/generated/dish-grilled-squid.png"
     },
     {
-      name: "Škampi na Buzaru",
-      description: "Dalmatinski škampi u umaku od rajčice, bijelog vina i češnjaka",
+      nameKey: "dish.scampi",
+      descKey: "dish.scampi.desc",
       price: "24€",
       image: "/generated/dish-scampi-buzara.png",
       specialty: true
     },
     {
-      name: "Grillana Orada",
-      description: "Cijela orada s roštilja, blitva, krumpir, maslinovo ulje",
+      nameKey: "dish.seabream",
+      descKey: "dish.seabream.desc",
       price: "18€",
       image: "/generated/dish-grilled-seabream.png"
     },
     {
-      name: "Riblja Plata za Dvoje",
-      description: "Mješavina grillanih riba i školjki - brancin, orada, lignje, škampi",
+      nameKey: "dish.platter",
+      descKey: "dish.platter.desc",
       price: "45€",
       image: "/generated/dish-mixed-grill.png",
       specialty: true
     },
     {
-      name: "Dagnje na Buzaru",
-      description: "Svježe dagnje u umaku od rajčice, bijelog vina i češnjaka",
+      nameKey: "dish.mussels",
+      descKey: "dish.mussels.desc",
       price: "12€",
       image: "/generated/dish-mussels-buzara.png"
     },
     {
-      name: "Brudet",
-      description: "Tradicionalni dalmatinski riblji gulaš s polentom",
+      nameKey: "dish.brudet",
+      descKey: "dish.brudet.desc",
       price: "16€",
       image: "/generated/dish-brudet.png"
     },
     {
-      name: "Rižoto od Škampa",
-      description: "Kremasto rižoto s dalmatinskim škampima i bijelim vinom",
+      nameKey: "dish.scampi.risotto",
+      descKey: "dish.scampi.risotto.desc",
       price: "20€",
       image: "/generated/dish-scampi-risotto.png"
     },
     {
-      name: "Tuna Steak",
-      description: "Grillani tuna odrezak s sezamom i soja umakom",
+      nameKey: "dish.tuna",
+      descKey: "dish.tuna.desc",
       price: "22€",
       image: "/generated/dish-tuna-steak.png"
     }
@@ -88,10 +91,10 @@ export function Menu() {
       <div className="container px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
-            Naš Meni
+            {t("menu.title")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Dnevno svjež ulov iz Jadranskog mora
+            {t("menu.subtitle")}
           </p>
         </div>
 
@@ -107,7 +110,7 @@ export function Menu() {
               <div className="relative h-48 md:h-56 overflow-hidden">
                 <Image
                   src={dish.image}
-                  alt={dish.name}
+                  alt={t(dish.nameKey)}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -115,7 +118,7 @@ export function Menu() {
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-accent text-accent-foreground font-semibold shadow-lg flex items-center gap-1">
                       <Star className="h-3 w-3 fill-current" />
-                      Specijalitet
+                      {t("menu.specialty")}
                     </Badge>
                   </div>
                 )}
@@ -125,14 +128,14 @@ export function Menu() {
               <div className="p-5 md:p-6">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-serif text-xl md:text-2xl font-semibold text-foreground">
-                    {dish.name}
+                    {t(dish.nameKey)}
                   </h3>
                   <span className="text-lg md:text-xl font-bold text-accent whitespace-nowrap ml-2">
                     {dish.price}
                   </span>
                 </div>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  {dish.description}
+                  {t(dish.descKey)}
                 </p>
               </div>
             </div>
@@ -142,7 +145,7 @@ export function Menu() {
         {/* Note */}
         <div className="text-center mt-12 md:mt-16">
           <p className="text-sm md:text-base text-muted-foreground italic">
-            Cijene mogu varirati ovisno o sezoni i dnevnom ulovu. Sva jela se pripremaju po narudžbi.
+            {t("menu.note")}
           </p>
         </div>
       </div>

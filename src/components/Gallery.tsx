@@ -4,6 +4,8 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { Camera } from "lucide-react";
+import Image from "next/image"; // Added import
+import { useLanguage } from "@/contexts/LanguageContext"; // Added import
 
 const galleryImages = [
   {
@@ -39,6 +41,7 @@ const galleryImages = [
 ];
 
 export function Gallery() {
+  const { t } = useLanguage(); // Added to use the language context
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -49,20 +52,14 @@ export function Gallery() {
   }));
 
   return (
-    <section id="galerija" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Camera className="h-6 w-6 text-accent" />
-            <span className="text-sm font-medium text-accent uppercase tracking-wide">
-              Galerija
-            </span>
-          </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Naša Jela i Ambijent
+    <section id="galerija" className="py-16 md:py-20 lg:py-32 bg-background"> {/* Updated padding and background */}
+      <div className="container px-4"> {/* Updated container class */}
+        <div className="text-center mb-12 md:mb-16"> {/* Updated margin */}
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4"> {/* Updated heading style */}
+            {t("gallery.title")} {/* Updated to use translated title */}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Doživite okuse Jadrana kroz našu kulinarsku priču
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto"> {/* Updated paragraph style */}
+            {t("gallery.subtitle")} {/* Updated to use translated subtitle */}
           </p>
         </div>
 
@@ -76,10 +73,13 @@ export function Gallery() {
                 setLightboxOpen(true);
               }}
             >
-              <img
+              <Image // Updated to use next/image
                 src={image.src}
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                layout="responsive"
+                width={400}
+                height={300}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4">

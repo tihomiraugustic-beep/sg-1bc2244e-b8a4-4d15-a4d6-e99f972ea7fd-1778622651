@@ -1,23 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export function Hero() {
   const { t } = useLanguage();
   
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay - Optimized with Next.js Image */}
+      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/generated/hero-seafood.png"
-          alt="Fresh seafood"
-          fill
-          priority
-          className="object-cover"
-          quality={85}
-          sizes="100vw"
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/generated/hero-seafood.png')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/95 to-background dark:from-background/60 dark:via-background/70 dark:to-background" />
       </div>

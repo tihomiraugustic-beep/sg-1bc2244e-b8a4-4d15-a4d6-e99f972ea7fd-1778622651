@@ -1,51 +1,33 @@
-import { lazy, Suspense } from "react";
-import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
+import { Menu } from "@/components/Menu";
+import { About } from "@/components/About";
+import { Gallery } from "@/components/Gallery";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { FloatingCallButton } from "@/components/FloatingCallButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { Toaster } from "@/components/ui/toaster";
-
-// Lazy load components below the fold for better initial load performance
-const Menu = lazy(() => import("@/components/Menu").then(m => ({ default: m.Menu })));
-const About = lazy(() => import("@/components/About").then(m => ({ default: m.About })));
-const Gallery = lazy(() => import("@/components/Gallery").then(m => ({ default: m.Gallery })));
-const Contact = lazy(() => import("@/components/Contact").then(m => ({ default: m.Contact })));
-
-// Loading fallback component
-function SectionLoader() {
-  return (
-    <div className="py-20 flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-    </div>
-  );
-}
+import { SEO } from "@/components/SEO";
 
 export default function Home() {
   return (
     <>
-      <SEO />
+      <SEO 
+        title="Restoran Silba - Riblji Restoran na Otoku Silba | Svježa Riba s Jadrana"
+        description="Otkrijte autentični okus Jadrana u restoranu Restoran Silba na otoku Silba. Dnevno svjež ulov, tradicionalni recepti, grillani brancin, hobotnica, crni rižoto. Rezervirajte stol online."
+        image="/og-image.png"
+        url="https://otoc-silba.hr"
+      />
+      
       <Navigation />
-      <main>
-        <Hero />
-        <Suspense fallback={<SectionLoader />}>
-          <Menu />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <About />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <Gallery />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <Contact />
-        </Suspense>
-      </main>
+      <Hero />
+      <Menu />
+      <About />
+      <Gallery />
+      <Contact />
       <Footer />
       <FloatingCallButton />
       <ScrollToTop />
-      <Toaster />
     </>
   );
 }

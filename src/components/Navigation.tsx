@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, memo } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ThemeSwitch } from "@/components/ThemeSwitch";
 
-function NavigationComponent() {
+export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { t, language, setLanguage } = useLanguage();
 
@@ -108,5 +108,3 @@ function NavigationComponent() {
     </nav>
   );
 }
-
-export const Navigation = memo(NavigationComponent);

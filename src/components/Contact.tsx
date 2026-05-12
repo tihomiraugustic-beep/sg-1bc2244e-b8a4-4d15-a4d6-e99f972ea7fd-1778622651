@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MapPin, Phone, Mail, Clock, Ship, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,10 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
 
 export function Contact() {
   const { toast } = useToast();
   const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -50,7 +54,6 @@ export function Contact() {
           variant: "default",
         });
         
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -78,74 +81,86 @@ export function Contact() {
     }
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: t("contact.location"),
+      content: ["Obala bb", "23450 Silba", "Hrvatska"]
+    },
+    {
+      icon: Phone,
+      title: t("contact.phone"),
+      content: ["+385 23 370 XXX"]
+    },
+    {
+      icon: Mail,
+      title: t("contact.email"),
+      content: ["info@otoc-silba.hr"]
+    },
+    {
+      icon: Clock,
+      title: t("contact.hours"),
+      content: [t("contact.hours.daily"), t("contact.hours.season")]
+    }
+  ];
+
   return (
-    <section id="kontakt" className="py-16 md:py-20 lg:py-32 bg-background">
+    <section id="kontakt" className="py-16 md:py-20 lg:py-32 bg-background" ref={ref}>
       <div className="container px-4">
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div 
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
             {t("contact.title")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("contact.subtitle")}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Information Grid - Stack on mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="text-accent mt-1">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">{t("contact.location")}</h3>
-                <p className="text-muted-foreground">
-                  Obala bb<br />
-                  23450 Silba<br />
-                  Hrvatska
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="text-accent mt-1">
-                <Phone className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">{t("contact.phone")}</h3>
-                <p className="text-muted-foreground">+385 23 370 XXX</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="text-accent mt-1">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">{t("contact.email")}</h3>
-                <p className="text-muted-foreground">info@otoc-silba.hr</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="text-accent mt-1">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">{t("contact.hours")}</h3>
-                <p className="text-muted-foreground">
-                  {t("contact.hours.daily")}<br />
-                  {t("contact.hours.season")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Contact Information Grid */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        >
+          {contactInfo.map((info, index) => {
+            const Icon = info.icon;
+            return (
+              <motion.div
+                key={index}
+                className="flex items-start gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1, ease: "easeOut" }}
+              >
+                <div className="text-accent mt-1">
+                  <Icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">{info.title}</h3>
+                  <div className="text-muted-foreground">
+                    {info.content.map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
         
         {/* Google Maps Embed */}
-        <div className="rounded-lg overflow-hidden border border-border shadow-md mb-12">
+        <motion.div 
+          className="rounded-lg overflow-hidden border border-border shadow-md mb-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+        >
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.427947864147!2d14.694684!3d44.3667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47634e0f0f0f0f0f%3A0x0!2sSilba%2C%20Croatia!5e0!3m2!1sen!2shr!4v1234567890"
             width="100%"
@@ -157,9 +172,15 @@ export function Contact() {
             title={t("contact.location")}
             className="w-full"
           />
-        </div>
+        </motion.div>
         
-        <div className="bg-muted/50 rounded-lg p-8">
+        {/* Reservation Form */}
+        <motion.div 
+          className="bg-muted/50 rounded-lg p-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+        >
           <h3 className="font-serif text-2xl font-semibold mb-3 text-primary text-center">
             {t("contact.reservation.title")}
           </h3>
@@ -284,7 +305,7 @@ export function Contact() {
               * {t("contact.form.name")}
             </p>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

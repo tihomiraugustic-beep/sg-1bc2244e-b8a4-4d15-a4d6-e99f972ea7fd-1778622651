@@ -2,9 +2,14 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 export function Menu() {
   const { t } = useLanguage();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   const dishes = [
     {
@@ -86,25 +91,57 @@ export function Menu() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section id="meni" className="py-16 md:py-20 lg:py-32 bg-background">
+    <section id="meni" className="py-16 md:py-20 lg:py-32 bg-background" ref={ref}>
       <div className="container px-4">
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div 
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 md:mb-4">
             {t("menu.title")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("menu.subtitle")}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Menu Grid - 1 column on mobile, 2 on tablet, 3 on desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Menu Grid */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {dishes.map((dish, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
-              style={{ animationDelay: `${index * 50}ms` }}
+              variants={itemVariants}
+              className="group bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300"
             >
               {/* Image */}
               <div className="relative h-48 md:h-56 overflow-hidden">
@@ -138,16 +175,21 @@ export function Menu() {
                   {t(dish.descKey)}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Note */}
-        <div className="text-center mt-12 md:mt-16">
+        <motion.div 
+          className="text-center mt-12 md:mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+        >
           <p className="text-sm md:text-base text-muted-foreground italic">
             {t("menu.note")}
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

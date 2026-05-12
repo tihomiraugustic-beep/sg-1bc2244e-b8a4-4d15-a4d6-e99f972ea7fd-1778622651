@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Hero() {
+  const { t } = useLanguage();
+  
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -19,17 +22,17 @@ export function Hero() {
           {/* Main Heading with Stagger Animation */}
           <div className="space-y-3 md:space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight">
-              Restoran Silba
+              {t("hero.title")}
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/90 font-medium px-4">
-              Svježa riba s Jadrana na otoku Silba
+              {t("hero.subtitle")}
             </p>
           </div>
 
           {/* Description */}
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-              Autentična otočka konoba s generacijskim nasljeđem
+              {t("hero.description")}
             </p>
           </div>
 
@@ -40,7 +43,7 @@ export function Hero() {
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={() => document.getElementById('meni')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Pogledaj Meni
+              {t("hero.cta")}
             </Button>
           </div>
         </div>

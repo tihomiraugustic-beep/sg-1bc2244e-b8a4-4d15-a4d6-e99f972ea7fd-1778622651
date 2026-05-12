@@ -6,6 +6,10 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const { t, language } = useLanguage();
 
+  const openCookieSettings = () => {
+    window.dispatchEvent(new Event("openCookieSettings"));
+  };
+
   return (
     <footer className="bg-card border-t border-border py-8 md:py-12">
       <div className="container px-4">
@@ -51,6 +55,14 @@ export function Footer() {
                 <Link href="/politika-privatnosti" className="text-muted-foreground hover:text-accent transition-colors">
                   {language === "hr" ? "Politika privatnosti" : "Privacy Policy"}
                 </Link>
+              </li>
+              <li>
+                <button 
+                  onClick={openCookieSettings}
+                  className="text-muted-foreground hover:text-accent transition-colors cursor-pointer"
+                >
+                  {language === "hr" ? "Postavke kolačića" : "Cookie Settings"}
+                </button>
               </li>
             </ul>
           </div>

@@ -31,7 +31,7 @@ export function Navigation() {
             href="#hero" 
             className="font-serif text-2xl font-bold text-primary hover:text-primary/90 transition-colors"
           >
-            {t("nav.title")}
+            Restoran Silba
           </Link>
 
           {/* Desktop Navigation */}

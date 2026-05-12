@@ -40,10 +40,28 @@ export default function Document() {
   return (
     <Html lang="hr">
       <Head>
-        <SEOElements />
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/og-image.png" />
-        <meta name="theme-color" content="#2563A5" />
+        
+        {/* Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        
+        {/* Static SEO Tags */}
+        <SEOElements />
+        
+        {/* Additional SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msapplication-TileColor" content="#1e5575" />
+        
+        {/* Sitemap & Robots */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* JSON-LD Structured Data */}
         <script

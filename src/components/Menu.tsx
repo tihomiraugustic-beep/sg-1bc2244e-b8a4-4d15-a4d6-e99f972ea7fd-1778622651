@@ -1,71 +1,88 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Fish, Waves, Flame, UtensilsCrossed } from "lucide-react";
-
-interface MenuItem {
-  name: string;
-  description: string;
-  price: string;
-  icon: React.ReactNode;
-}
-
-const menuItems: MenuItem[] = [
-  {
-    name: "Brancin na žaru",
-    description: "Svježi brancin s Jadrana, grillan na drvenom ugljenu, maslac od svježih trava",
-    price: "35€",
-    icon: <Fish className="w-6 h-6" />
-  },
-  {
-    name: "Orada na solima",
-    description: "Cijela orada pečena u morskoj soli, maslinovo ulje i limun",
-    price: "32€",
-    icon: <Flame className="w-6 h-6" />
-  },
-  {
-    name: "Hobotnica ispod peke",
-    description: "Traditionally cooked octopus with potatoes, cherry tomatoes, garlic",
-    price: "38€",
-    icon: <Waves className="w-6 h-6" />
-  },
-  {
-    name: "Crni rižoto od sipe",
-    description: "Domaći rižoto od svježe sipe, bijelo vino, peršin",
-    price: "28€",
-    icon: <UtensilsCrossed className="w-6 h-6" />
-  },
-  {
-    name: "Carpaccio od tune",
-    description: "Tanko rezana svježa tuna, ekstra djevičansko maslinovo ulje, kapari, rukkola",
-    price: "24€",
-    icon: <Fish className="w-6 h-6" />
-  },
-  {
-    name: "Škampi na buzaru",
-    description: "Jumbo škampi, domaća paradajz salsa, bijelo vino, češnjak",
-    price: "42€",
-    icon: <Waves className="w-6 h-6" />
-  },
-  {
-    name: "Dagnje na crno",
-    description: "Fresh mussels in white wine sauce with garlic and parsley",
-    price: "22€",
-    icon: <Waves className="w-6 h-6" />
-  },
-  {
-    name: "Salata od hobotnice",
-    description: "Tender octopus salad with potatoes, onions, olive oil, lemon",
-    price: "26€",
-    icon: <UtensilsCrossed className="w-6 h-6" />
-  },
-  {
-    name: "Dnevni ulov",
-    description: "Pitajte konobara za današnji svježi ulov",
-    price: "Cijena na upit",
-    icon: <Fish className="w-6 h-6" />
-  }
-];
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
 
 export function Menu() {
+  const dishes = [
+    {
+      name: "Grillani Brancin",
+      description: "Svježi brancin s dalmatinskim pršutom, maslinovo ulje, limun, blitva",
+      price: "180 kn",
+      image: "/generated/dish-seabass.png",
+      specialty: true
+    },
+    {
+      name: "Hobotnica Ispod Peke",
+      description: "Tradicionalna priprema ispod željeznog poklopca, krumpir, blitva",
+      price: "160 kn",
+      image: "/generated/dish-octopus-peka.png",
+      specialty: true
+    },
+    {
+      name: "Salata od Hobotnice",
+      description: "Kuhana hobotnica, krumpir, crveni luk, peršin, maslinovo ulje",
+      price: "95 kn",
+      image: "/generated/dish-octopus-salad.png"
+    },
+    {
+      name: "Crni Rižoto",
+      description: "Rižoto od sipe s domaćim vinom i začinima",
+      price: "120 kn",
+      image: "/generated/dish-black-risotto.png",
+      specialty: true
+    },
+    {
+      name: "Lignje na Žaru",
+      description: "Svježe lignje s roštilja, blitva, krumpir, češnjak i peršin",
+      price: "110 kn",
+      image: "/generated/dish-grilled-squid.png"
+    },
+    {
+      name: "Škampi na Buzaru",
+      description: "Veliki dalmatinski škampi u umaku od rajčice i bijelog vina",
+      price: "220 kn",
+      image: "/generated/dish-scampi-buzara.png",
+      specialty: true
+    },
+    {
+      name: "Orada na Gradele",
+      description: "Cijela orada s roštilja, blitva, krumpir, maslinovo ulje",
+      price: "170 kn",
+      image: "/generated/dish-grilled-seabream.png"
+    },
+    {
+      name: "Riblja Plata za Dvoje",
+      description: "Miješano s roštilja: brancin, orada, lignje, škampi, prilog",
+      price: "380 kn",
+      image: "/generated/dish-mixed-grill.png",
+      specialty: true
+    },
+    {
+      name: "Dagnje na Buzaru",
+      description: "Svježe dagnje u umaku od rajčice, bijelog vina i češnjaka",
+      price: "85 kn",
+      image: "/generated/dish-mussels-buzara.png"
+    },
+    {
+      name: "Brudet",
+      description: "Tradicionalna dalmatinska riblja juha s miješanom ribom i polentom",
+      price: "130 kn",
+      image: "/generated/dish-brudet.png"
+    },
+    {
+      name: "Rižoto od Škampa",
+      description: "Kremasti rižoto s velikim dalmatinskim škampima",
+      price: "180 kn",
+      image: "/generated/dish-scampi-risotto.png"
+    },
+    {
+      name: "Tuna Steak",
+      description: "Svježi tuna odrezak s grillla, sesame sjemenke, soja umak",
+      price: "200 kn",
+      image: "/generated/dish-tuna-steak.png"
+    }
+  ];
+
   return (
     <section id="meni" className="py-16 md:py-20 lg:py-32 bg-background">
       <div className="container px-4">
@@ -78,39 +95,54 @@ export function Menu() {
           </p>
         </div>
 
+        {/* Menu Grid - 1 column on mobile, 2 on tablet, 3 on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {menuItems.map((item, index) => (
-            <Card 
-              key={index} 
-              className="hover:shadow-lg transition-shadow duration-300 border-border bg-card"
+          {dishes.map((dish, index) => (
+            <div
+              key={index}
+              className="group bg-card rounded-lg overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
-              <CardHeader>
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1">
-                    <CardTitle className="font-serif text-xl mb-2 text-primary">
-                      {item.name}
-                    </CardTitle>
+              {/* Image */}
+              <div className="relative h-48 md:h-56 overflow-hidden">
+                <Image
+                  src={dish.image}
+                  alt={dish.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {dish.specialty && (
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-accent text-accent-foreground font-semibold shadow-lg flex items-center gap-1">
+                      <Star className="h-3 w-3 fill-current" />
+                      Specijalitet
+                    </Badge>
                   </div>
-                  <div className="text-accent flex-shrink-0">
-                    {item.icon}
-                  </div>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="p-5 md:p-6">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="font-serif text-xl md:text-2xl font-semibold text-foreground">
+                    {dish.name}
+                  </h3>
+                  <span className="text-lg md:text-xl font-bold text-accent whitespace-nowrap ml-2">
+                    {dish.price}
+                  </span>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-foreground/70 mb-4 leading-relaxed">
-                  {item.description}
-                </CardDescription>
-                <div className="font-semibold text-lg text-accent">
-                  {item.price}
-                </div>
-              </CardContent>
-            </Card>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                  {dish.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground italic">
-            * Cijene su informativne i podložne promjenama ovisno o svježem dnevnom ulovu
+
+        {/* Note */}
+        <div className="text-center mt-12 md:mt-16">
+          <p className="text-sm md:text-base text-muted-foreground italic">
+            Cijene mogu varirati ovisno o sezoni i dnevnom ulovu. Sva jela se pripremaju po narudžbi.
           </p>
         </div>
       </div>

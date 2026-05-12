@@ -6,79 +6,79 @@ export function Menu() {
   const dishes = [
     {
       name: "Grillani Brancin",
-      description: "Svježi brancin s dalmatinskim pršutom, maslinovo ulje, limun, blitva",
-      price: "180 kn",
+      description: "Svježi brancin s roštilja s blitvom, krumpirom i maslinovim uljem",
+      price: "20€",
       image: "/generated/dish-seabass.png",
       specialty: true
     },
     {
       name: "Hobotnica Ispod Peke",
-      description: "Tradicionalna priprema ispod željeznog poklopca, krumpir, blitva",
-      price: "160 kn",
+      description: "Tradicionalna hobotnica pečena pod pekom s krumpirom i blitvom",
+      price: "22€",
       image: "/generated/dish-octopus-peka.png",
       specialty: true
     },
     {
       name: "Salata od Hobotnice",
-      description: "Kuhana hobotnica, krumpir, crveni luk, peršin, maslinovo ulje",
-      price: "95 kn",
+      description: "Hobotnica, krumpir, crveni luk, kapare, maslinovo ulje i limun",
+      price: "14€",
       image: "/generated/dish-octopus-salad.png"
     },
     {
       name: "Crni Rižoto",
-      description: "Rižoto od sipe s domaćim vinom i začinima",
-      price: "120 kn",
+      description: "Crni rižoto od sipe s domaćim bijelim vinom",
+      price: "18€",
       image: "/generated/dish-black-risotto.png",
       specialty: true
     },
     {
       name: "Lignje na Žaru",
-      description: "Svježe lignje s roštilja, blitva, krumpir, češnjak i peršin",
-      price: "110 kn",
+      description: "Pržene lignje punjene sa češnjakom i peršinom, blitva i krumpir",
+      price: "16€",
       image: "/generated/dish-grilled-squid.png"
     },
     {
       name: "Škampi na Buzaru",
-      description: "Veliki dalmatinski škampi u umaku od rajčice i bijelog vina",
-      price: "220 kn",
+      description: "Dalmatinski škampi u umaku od rajčice, bijelog vina i češnjaka",
+      price: "24€",
       image: "/generated/dish-scampi-buzara.png",
       specialty: true
     },
     {
-      name: "Orada na Gradele",
+      name: "Grillana Orada",
       description: "Cijela orada s roštilja, blitva, krumpir, maslinovo ulje",
-      price: "170 kn",
+      price: "18€",
       image: "/generated/dish-grilled-seabream.png"
     },
     {
       name: "Riblja Plata za Dvoje",
-      description: "Miješano s roštilja: brancin, orada, lignje, škampi, prilog",
-      price: "380 kn",
+      description: "Mješavina grillanih riba i školjki - brancin, orada, lignje, škampi",
+      price: "45€",
       image: "/generated/dish-mixed-grill.png",
       specialty: true
     },
     {
       name: "Dagnje na Buzaru",
       description: "Svježe dagnje u umaku od rajčice, bijelog vina i češnjaka",
-      price: "85 kn",
+      price: "12€",
       image: "/generated/dish-mussels-buzara.png"
     },
     {
       name: "Brudet",
-      description: "Tradicionalna dalmatinska riblja juha s miješanom ribom i polentom",
-      price: "130 kn",
+      description: "Tradicionalni dalmatinski riblji gulaš s polentom",
+      price: "16€",
       image: "/generated/dish-brudet.png"
     },
     {
       name: "Rižoto od Škampa",
-      description: "Kremasti rižoto s velikim dalmatinskim škampima",
-      price: "180 kn",
+      description: "Kremasto rižoto s dalmatinskim škampima i bijelim vinom",
+      price: "20€",
       image: "/generated/dish-scampi-risotto.png"
     },
     {
       name: "Tuna Steak",
-      description: "Svježi tuna odrezak s grillla, sesame sjemenke, soja umak",
-      price: "200 kn",
+      description: "Grillani tuna odrezak s sezamom i soja umakom",
+      price: "22€",
       image: "/generated/dish-tuna-steak.png"
     }
   ];

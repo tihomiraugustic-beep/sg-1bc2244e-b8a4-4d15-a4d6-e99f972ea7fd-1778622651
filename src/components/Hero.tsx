@@ -7,13 +7,17 @@ export function Hero() {
   
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/generated/hero-seafood.png')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/95 to-background dark:from-background/60 dark:via-background/70 dark:to-background" />
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/generated/hero-seafood.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/90 to-background" />
       </div>
 
       {/* Content */}

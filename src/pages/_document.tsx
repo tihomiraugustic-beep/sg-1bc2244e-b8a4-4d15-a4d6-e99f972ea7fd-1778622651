@@ -2,12 +2,23 @@ import { Html, Head, Main, NextScript } from "next/document";
 import { SEOElements } from "@/components/SEO";
 
 export default function Document() {
-  const restaurantSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
+    "@id": "https://restoran-silba.hr/#restaurant",
     "name": "Restoran Silba",
-    "description": "Riblji restoran na otoku Silba s dnevno svježim ulovom i tradicionalnim receptima",
-    "image": "https://otoc-silba.hr/og-image.png",
+    "alternateName": "Otoč Silba",
+    "description": "Riblji restoran s tradicijom na otoku Silba. Svježa jadranska riba, autentična dalmatinska kuhinja i nezaboravan pogled na more.",
+    "url": "https://restoran-silba.hr",
+    "image": [
+      "https://restoran-silba.hr/og-image.png",
+      "https://restoran-silba.hr/generated/fresh-seafood-display.png"
+    ],
+    "logo": "https://restoran-silba.hr/favicon.ico",
+    "telephone": "+385-98-123-4567",
+    "email": "info@otoc-silba.hr",
+    "priceRange": "€€",
+    "servesCuisine": ["Dalmatinska", "Mediteranska", "Plodovi Mora"],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Obala bb",
@@ -18,13 +29,8 @@ export default function Document() {
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "44.3667",
-      "longitude": "14.7000"
+      "longitude": "14.7"
     },
-    "url": "https://otoc-silba.hr",
-    "telephone": "+385-98-123-4567",
-    "email": "info@otoc-silba.hr",
-    "servesCuisine": ["Croatian", "Seafood", "Mediterranean"],
-    "priceRange": "€€",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -33,41 +39,76 @@ export default function Document() {
         "closes": "23:00"
       }
     ],
-    "acceptsReservations": "True",
-    "hasMenu": "https://otoc-silba.hr/#meni"
+    "acceptsReservations": "https://restoran-silba.hr/#kontakt",
+    "hasMenu": "https://restoran-silba.hr/#meni",
+    "paymentAccepted": "Gotovina, Kartica",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "44.3667",
+        "longitude": "14.7"
+      },
+      "geoRadius": "50000"
+    },
+    "sameAs": [
+      "https://www.facebook.com/restoransilba",
+      "https://www.instagram.com/restoransilba"
+    ]
+  };
+
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Početna",
+        "item": "https://restoran-silba.hr"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Meni",
+        "item": "https://restoran-silba.hr/#meni"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "O Nama",
+        "item": "https://restoran-silba.hr/#o-nama"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Kontakt",
+        "item": "https://restoran-silba.hr/#kontakt"
+      }
+    ]
   };
 
   return (
     <Html lang="hr">
       <Head>
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/og-image.png" />
-        
-        {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        
-        {/* Static SEO Tags */}
         <SEOElements />
-        
-        {/* Additional SEO */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="msapplication-TileColor" content="#1e5575" />
-        
-        {/* Sitemap & Robots */}
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+        />
+        
+        {/* Preconnect to improve performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </Head>
       <body className="antialiased">
         <Main />
